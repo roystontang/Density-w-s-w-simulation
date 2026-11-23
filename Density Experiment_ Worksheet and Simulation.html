@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Density Experiment: Worksheet and Simulation</title><style>
+:root{--bg:#f7f8fa;--fg:#1f2933;--muted:#5b6670;--card:#fff;--line:#cfd6dd;--accent:#2f6fb3;--good:#2e7d4f;--warn:#a65b00;--btn:#2f6fb3;--btnfg:#fff;--glass:#9aa5b1;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#171b20;--fg:#e8ecf0;--muted:#a3adb7;--card:#222830;--line:#3a434d;--accent:#7db4ec;--good:#6fcf97;--warn:#f2b157;--btn:#5a9be0;--btnfg:#0e1216;--glass:#7d8894}}
+:root[data-theme="dark"]{--bg:#171b20;--fg:#e8ecf0;--muted:#a3adb7;--card:#222830;--line:#3a434d;--accent:#7db4ec;--good:#6fcf97;--warn:#f2b157;--btn:#5a9be0;--btnfg:#0e1216;--glass:#7d8894}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+main{max-width:860px;margin:0 auto;padding:20px 16px 40px}
+h1{font-size:1.5rem;margin:0 0 4px}
+p{margin:6px 0}
+.muted{color:var(--muted)}
+.steps{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:14px 0}
+.steps ol{margin:4px 0 0 20px;padding:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:700px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+label{display:block;font-weight:600;margin:10px 0 4px}
+select{width:100%;font:inherit;padding:10px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--fg)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+button{font:inherit;font-weight:600;padding:10px 16px;border-radius:8px;border:2px solid var(--btn);background:transparent;color:var(--fg);cursor:pointer}
+button.main{background:var(--btn);color:var(--btnfg)}
+button[aria-pressed="true"]{background:var(--btn);color:var(--btnfg)}
+button:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+svg{width:100%;height:auto;max-height:380px;display:block}
+.bar{height:22px;border-radius:6px;background:var(--line);overflow:hidden;margin:4px 0 10px}
+.bar>i{display:block;height:100%;transition:width .5s}
+.res{border-left:6px solid var(--accent);padding:10px 14px;margin-top:12px;background:var(--bg);border-radius:6px;min-height:3.2em}
+.res.sink{border-color:var(--warn)}.res.float{border-color:var(--good)}
+.fine{font-size:.9rem}
+.fb{margin-top:10px;border-left-width:6px}
+.fb.ok{border-color:var(--good)}
+.fb.no{border-color:var(--warn)}
+.fb[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+h2{font-size:1.3rem;margin:26px 0 6px;border-bottom:2px solid var(--line);padding-bottom:4px}
+h3{font-size:1.1rem;margin:20px 0 4px}
+nav a{display:inline-block;padding:8px 14px;border:2px solid var(--btn);border-radius:8px;color:var(--fg);text-decoration:none;font-weight:600}
+input.w{width:min(100%,320px)}input.s{width:130px}input.n{width:76px}
+input[type=text],input:not([type]),textarea{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--fg)}
+textarea{width:100%;box-sizing:border-box}
+.ck{display:block;margin:6px 0}.ck input{width:20px;height:20px;vertical-align:middle;margin-right:8px}
+table{border-collapse:collapse;margin:8px 0}th,td{border:1px solid var(--line);padding:6px 8px;text-align:left}th{background:var(--card)}
+.scroll{overflow-x:auto}details summary{cursor:pointer}
+section{margin-bottom:8px}
+</style></head><body><main><header>
+<h1>Density Lab: Will It Sink or Float?</h1>
+<p class="muted">Secondary 1 Science · ASD-friendly lab · Part 1 is the worksheet. Part 2 is the simulation.</p>
+<nav class="row"><a href="#ws">Part 1: Worksheet</a><a href="#sim">Part 2: Simulation</a></nav>
+</header>
+
+<section id="ws">
+<h2>Part 1: Worksheet</h2>
+<p><b>Name:</b> <input class="w" aria-label="Name"> <b>Class:</b> <input class="s" aria-label="Class"> <b>Date:</b> <input class="s" aria-label="Date"></p>
+
+<details class="steps"><summary><b>Teacher notes</b> (tap to open)</summary>
+<p><b>Outcomes:</b> measure mass (balance) and volume (ruler and water displacement); calculate density = mass ÷ volume; use density to predict sink or float in water (1 g/cm³). Please check against the current MOE Lower Secondary Science syllabus. Time: 60 minutes.</p>
+<p><b>Per pair:</b> electronic balance, 30 cm ruler, 100 mL measuring cylinder with 50 mL water, dropper, paper towel, tray, calculator. Objects: A wooden block, B aluminium or plastic block, C metal nut or small stone. Use the same tray layout every time. Use safe, unscented materials.</p>
+<p><b>Supports for students with ASD:</b> show the plan first and warn about changes early; give one literal instruction per step; use checklists and diagrams; allow headphones, a quiet bench, a solo option and written role cards; allow extra time; accept answers by writing, ticking, drawing or speaking; agree a break signal before the lesson.</p>
+<p><b>Misconceptions:</b> “heavy things sink” and “big things sink”. Density compares mass for each cm³. 1 mL = 1 cm³.</p>
+<p><b>Worked example (show first):</b> Object X is 120 g, 4 cm × 5 cm × 3 cm. Volume = 60 cm³. Density = 120 ÷ 60 = 2 g/cm³. 2 is more than 1, so it sinks.</p>
+<p><b>Typical densities (g/cm³):</b> wood 0.4 to 0.9 · plastic 0.9 to 1.4 · aluminium 2.7 · iron 7.8 · water 1.0. Test every object once before the lesson.</p>
+</details>
+
+<div class="steps"><b>Today’s plan</b>
+<ol><li>Read the question and predict (5 min)</li><li>Measure mass of A, B, C (10 min)</li><li>Measure volume of A and B with a ruler (10 min)</li><li>Measure volume of C with water (10 min)</li><li>Calculate density (10 min)</li><li>Conclusion and pack up (10 min)</li><li>Exit ticket and simulation (5 min+)</li></ol>
+<p><b>First</b> I do the experiment. <b>Then</b> I have a short break.</p></div>
+
+<h3>The question</h3>
+<p><b>Which objects will sink in water, and which will float?</b></p>
+<ul>
+<li><b>Mass:</b> how much matter is in an object. Unit: grams (g).</li>
+<li><b>Volume:</b> how much space an object takes up. Unit: cm³ or mL.</li>
+<li><b>Density:</b> mass in each 1 cm³. <b>Density = mass ÷ volume.</b> Unit: g/cm³.</li>
+<li>Water density = <b>1 g/cm³</b>. More than 1: <b>sinks</b>. Less than 1: <b>floats</b>.</li>
+</ul>
+<p><b>Roles:</b> Measurer (uses balance, ruler, cylinder). Recorder (writes numbers, uses calculator). Swap after Object B. Working alone? Do both jobs.</p>
+<div class="steps"><b>Safety rules</b><ol><li>Keep water inside the tray.</li><li>If water spills, wipe it with the paper towel and tell the teacher if the floor is wet.</li><li>Slide objects gently down the side of the cylinder.</li><li>Do not put objects in your mouth.</li><li>Do not carry equipment around the room.</li></ol></div>
+
+<h3>Step 1: Prediction</h3>
+<p>Look at A, B and C. Do not pick them up yet.</p>
+<table><tr><th>Object</th><th>Sink</th><th>Float</th></tr>
+<tr><td>A (wooden block)</td><td><input type="radio" name="pa" aria-label="A sink"></td><td><input type="radio" name="pa" aria-label="A float"></td></tr>
+<tr><td>B (block)</td><td><input type="radio" name="pb" aria-label="B sink"></td><td><input type="radio" name="pb" aria-label="B float"></td></tr>
+<tr><td>C (nut or stone)</td><td><input type="radio" name="pc" aria-label="C sink"></td><td><input type="radio" name="pc" aria-label="C float"></td></tr></table>
+<p>I think this because <input class="w" aria-label="Reason"> (write, draw or say it)</p>
+
+<h3>Step 2: Measure the mass</h3>
+<label class="ck"><input type="checkbox"> 1. Check the balance shows 0.0 g.</label>
+<label class="ck"><input type="checkbox"> 2. Put Object A in the middle of the balance.</label>
+<label class="ck"><input type="checkbox"> 3. Wait until the number stops changing.</label>
+<label class="ck"><input type="checkbox"> 4. Write the number in the table (Mass).</label>
+<label class="ck"><input type="checkbox"> 5. Take Object A off. Repeat for B and C.</label>
+
+<h3>Step 3: Volume of A and B (cuboids)</h3>
+<label class="ck"><input type="checkbox"> 1. Measure length, width and height in cm.</label>
+<label class="ck"><input type="checkbox"> 2. Write them in the table.</label>
+<label class="ck"><input type="checkbox"> 3. Calculate volume = length × width × height.</label>
+
+<h3>Step 4: Volume of C (water)</h3>
+<label class="ck"><input type="checkbox"> 1. Check the cylinder has 50 mL of water. This is V₁.</label>
+<label class="ck"><input type="checkbox"> 2. Tilt the cylinder. Slide Object C gently down the side.</label>
+<label class="ck"><input type="checkbox"> 3. Wait until the water is still. Read the new level. This is V₂.</label>
+<label class="ck"><input type="checkbox"> 4. Volume of C = V₂ − V₁.</label>
+<p class="muted fine">Reading tip: put your eye level with the water. Read the bottom of the curved surface.</p>
+
+<h3>Step 5: Results</h3>
+<div class="scroll"><table>
+<tr><th>Object</th><th>Mass (g)</th><th>Length (cm)</th><th>Width (cm)</th><th>Height (cm)</th><th>V₁ (mL)</th><th>V₂ (mL)</th><th>Volume (cm³)</th><th>Density (g/cm³)</th></tr>
+<tr><td>A</td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td><td>–</td><td>–</td><td><input class="n"></td><td><input class="n"></td></tr>
+<tr><td>B</td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td><td>–</td><td>–</td><td><input class="n"></td><td><input class="n"></td></tr>
+<tr><td>C</td><td><input class="n"></td><td>–</td><td>–</td><td>–</td><td>50</td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td></tr>
+</table></div>
+<p class="fine muted">Density = mass ÷ volume. Write your calculation: A = ____ ÷ ____ = ____ · B = ____ ÷ ____ = ____ · C = ____ ÷ ____ = ____</p>
+
+<h3>Step 6: Compare with water (1 g/cm³)</h3>
+<div class="scroll"><table><tr><th>Object</th><th>Density</th><th>More or less than 1?</th><th>Sink or float?</th></tr>
+<tr><td>A</td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td></tr>
+<tr><td>B</td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td></tr>
+<tr><td>C</td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td></tr></table></div>
+
+<h3>Step 7: Conclusion</h3>
+<p class="fine muted">Sentence starters: My prediction for A was ___. The density showed it would ___. · Object ___ has the highest density. · An object sinks when its density is (more / less) than 1 g/cm³. · My prediction was (correct / not correct) because ___.</p>
+<textarea rows="4" aria-label="Conclusion"></textarea>
+
+<h3>Pack up</h3>
+<label class="ck"><input type="checkbox"> Dry the objects and put A, B and C on the tray.</label>
+<label class="ck"><input type="checkbox"> Pour the water away or ask the teacher.</label>
+<label class="ck"><input type="checkbox"> Wipe the bench and wash your hands.</label>
+
+<h3>Exit ticket</h3>
+<p>1. Density is calculated using: <label><input type="radio" name="e1"> mass × volume</label> <label><input type="radio" name="e1"> mass ÷ volume</label> <label><input type="radio" name="e1"> volume ÷ mass</label></p>
+<p>2. An object has a density of 0.5 g/cm³. In water it will: <label><input type="radio" name="e2"> sink</label> <label><input type="radio" name="e2"> float</label></p>
+<p>3. The unit for density is: <label><input type="radio" name="e3"> g</label> <label><input type="radio" name="e3"> cm³</label> <label><input type="radio" name="e3"> g/cm³</label></p>
+<p>One thing I learned: <input class="w" aria-label="One thing I learned"></p>
+<p>I felt: <label><input type="radio" name="e4"> OK</label> <label><input type="radio" name="e4"> A bit tired</label> <label><input type="radio" name="e4"> Need a break</label> (any answer is fine)</p>
+</section>
+
+<section id="sim-intro">
+<h2 id="sim">Part 2: Simulation</h2>
+<p>Use this after the lab. Try different liquids and objects. You can also write results here:</p>
+<div class="scroll"><table><tr><th>Liquid</th><th>Liquid density</th><th>Object</th><th>Object density</th><th>My prediction</th><th>What happened</th></tr>
+<tr><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td></tr>
+<tr><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td></tr>
+<tr><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td><td><input class="n"></td></tr></table></div>
+<ol class="fine"><li>Water and pine wood: sink or float? Why?</li><li>Water and iron: sink or float? Why?</li><li>Cooking oil and ice: what happens?</li><li>Find an object that floats in one liquid but sinks in another.</li><li>An object sinks when its density is ______ than the liquid’s density.</li></ol>
+</section>
+
+<h3>Density Simulation: Sink or Float?</h3>
+<p class="muted">Pick a liquid and an object. Compare their densities. Then press Drop.</p>
+
+<div class="steps"><strong>How to use this page</strong>
+<ol>
+<li>Choose a liquid.</li>
+<li>Choose an object.</li>
+<li>Look at the two densities.</li>
+<li>Choose your prediction: sinks or floats.</li>
+<li>Press <b>Drop object</b>.</li>
+<li>Read the result.</li>
+</ol></div>
+
+<div class="grid">
+<div class="card">
+<label for="liq">1. Liquid</label>
+<select id="liq"></select>
+<label for="obj">2. Object</label>
+<select id="obj"></select>
+
+<p style="margin-top:14px"><strong>3. Densities (g/cm³)</strong></p>
+<div>Liquid: <b id="ld"></b> g/cm³</div>
+<div class="bar"><i id="lb" style="background:#4a90d9"></i></div>
+<div>Object: <b id="od"></b> g/cm³</div>
+<div class="bar"><i id="ob" style="background:#8a6d3b"></i></div>
+<p class="muted fine">Bars use one scale from 0 to 8 g/cm³.</p>
+
+<p style="margin-top:12px"><strong>4. My prediction</strong></p>
+<div class="row">
+<button id="pS" aria-pressed="false">Sinks</button>
+<button id="pF" aria-pressed="false">Floats</button>
+</div>
+<div class="row">
+<button id="drop" class="main">5. Drop object</button>
+<button id="reset">Reset</button>
+</div>
+</div>
+
+<div class="card">
+<svg id="svg" viewBox="0 0 300 300" role="img" aria-label="A beaker of liquid with an object">
+<g id="o" style="transform:translate(0px,0px);transition:transform 1.8s ease-in-out">
+<rect id="orect" x="125" y="0" width="50" height="50" rx="4" stroke="#333" stroke-width="2"/>
+</g>
+<rect id="lrect" x="62" y="130" width="176" height="150" fill="#4a90d9" opacity=".5"/>
+<path d="M60 60 V280 H240 V60" fill="none" stroke="var(--glass)" stroke-width="4" stroke-linejoin="round"/>
+<line x1="62" y1="130" x2="238" y2="130" stroke="var(--fg)" stroke-width="1.5" stroke-dasharray="5 4"/>
+<text x="244" y="134" font-size="11" fill="var(--muted)">liquid surface</text>
+</svg>
+<div id="res" class="res" aria-live="polite">Choose a prediction, then press Drop object.</div>
+<div id="fb" class="res fb" aria-live="polite" hidden></div>
+</div>
+</div>
+
+<div class="steps">
+<strong>The rule</strong>
+<ul style="margin:4px 0 0 20px;padding:0">
+<li>Object density <b>more than</b> liquid density: the object <b>sinks</b>.</li>
+<li>Object density <b>less than</b> liquid density: the object <b>floats</b>.</li>
+<li>Object density <b>equal to</b> liquid density: the object stays <b>suspended</b> in the liquid.</li>
+</ul>
+<p class="fine muted">Density values are typical and approximate. Real objects can differ a little.</p>
+</div>
+</main><script>
+var L=[{n:"Water",d:1.00,c:"#4a90d9"},{n:"Salt water",d:1.03,c:"#3a7ca5"},{n:"Cooking oil",d:0.92,c:"#e0b43a"},{n:"Glycerin",d:1.26,c:"#8fc9b0"},{n:"Honey",d:1.42,c:"#d98e1f"}];
+var O=[{n:"Cork",d:0.24,c:"#c49a6c"},{n:"Pine wood",d:0.50,c:"#a9784a"},{n:"Ice",d:0.92,c:"#bfe3f2"},{n:"Candle wax",d:0.93,c:"#f1e6c8"},{n:"Rubber",d:1.10,c:"#6b6b6b"},{n:"Aluminium",d:2.70,c:"#b8c0c8"},{n:"Iron",d:7.80,c:"#5a5f66"}];
+var S=130,B=280,SZ=50,pred=null;
+function $(i){return document.getElementById(i)}
+function fill(sel,arr){arr.forEach(function(x,i){var o=document.createElement("option");o.value=i;o.textContent=x.n+" ("+x.d.toFixed(2)+" g/cm³)";sel.appendChild(o)})}
+fill($("liq"),L);fill($("obj"),O);$("obj").value=1;
+function cur(){return{l:L[+$("liq").value],o:O[+$("obj").value]}}
+function show(){
+ var c=cur();
+ $("ld").textContent=c.l.d.toFixed(2);$("od").textContent=c.o.d.toFixed(2);
+ $("lb").style.width=Math.min(c.l.d/8*100,100)+"%";$("ob").style.width=Math.min(c.o.d/8*100,100)+"%";
+ $("lb").style.background=c.l.c;$("ob").style.background=c.o.c;
+ $("lrect").setAttribute("fill",c.l.c);$("orect").setAttribute("fill",c.o.c);
+}
+function reset(){
+ var g=$("o");g.style.transition="none";g.style.transform="translate(0px,0px)";
+ void g.getBoundingClientRect();g.style.transition="";
+ var r=$("res");r.className="res";r.textContent="Choose a prediction, then press Drop object.";
+ $("fb").hidden=true;
+ show();
+}
+function setPred(p){
+ pred=p;$("pS").setAttribute("aria-pressed",p==="sink");$("pF").setAttribute("aria-pressed",p==="float");
+}
+function drop(){
+ var c=cur(),lo=c.l.d,od=c.o.d,top,out,cls;
+ if(Math.abs(lo-od)<0.005){top=(S+B)/2-SZ/2;out="suspend";cls="float"}
+ else if(od>lo){top=B-SZ;out="sink";cls="sink"}
+ else{top=S+SZ*(od/lo)-SZ;out="float";cls="float"}
+ $("o").style.transform="translate(0px,"+top+"px)";
+ var msg=c.o.n+" has a density of "+od.toFixed(2)+" g/cm³. "+c.l.n+" has a density of "+lo.toFixed(2)+" g/cm³. ";
+ if(out==="sink")msg+=od.toFixed(2)+" is more than "+lo.toFixed(2)+", so the object sinks.";
+ else if(out==="float")msg+=od.toFixed(2)+" is less than "+lo.toFixed(2)+", so the object floats. About "+Math.round(od/lo*100)+"% of it is under the liquid.";
+ else msg+="The densities are equal, so the object stays suspended.";
+ var r=$("res");r.textContent=msg;r.className="res "+cls;
+ var fb=$("fb");fb.hidden=false;
+ if(!pred){fb.className="res fb";fb.textContent="Comment: You did not choose a prediction this time. Next time, look at the two densities first. Then choose sinks or floats before you press Drop object.";}
+ else if(out==="suspend"){fb.className="res fb ok";fb.textContent="Comment: The two densities are equal, so the object neither sinks nor floats. It stays in the middle. Sinks and floats are both close answers here. Well done for looking at the numbers.";}
+ else if((pred==="sink"&&out==="sink")||(pred==="float"&&out==="float")){fb.className="res fb ok";fb.textContent="Comment: Well done. Your prediction was correct. You compared the object’s density with the liquid’s density. This method works every time.";}
+ else{fb.className="res fb no";fb.textContent="Comment: Your prediction was different from the result. That is OK, and it helps you learn. Check the numbers: the object is "+od.toFixed(2)+" g/cm³ and the liquid is "+lo.toFixed(2)+" g/cm³. The object is "+(od>lo?"denser":"less dense")+" than the liquid, so it "+(od>lo?"sinks":"floats")+". Remember: density is the mass in each 1 cm³. It is not the same as how heavy or how big an object looks. Try again: press Reset, choose the same pair, and compare the two numbers before you predict.";}
+}
+$("liq").onchange=function(){reset()};
+$("obj").onchange=function(){reset()};
+$("pS").onclick=function(){setPred("sink")};
+$("pF").onclick=function(){setPred("float")};
+$("drop").onclick=drop;
+$("reset").onclick=function(){setPred(null);reset()};
+show();
+</script></body></html>
